@@ -1,0 +1,6 @@
+{
+    "editor.wrappingIndent": "deepIndent",
+    "editor.wrappingStrategy": "advanced",
+    "editor.tabSize": 4,
+    "editor.wordWrap": "bounded"
+}

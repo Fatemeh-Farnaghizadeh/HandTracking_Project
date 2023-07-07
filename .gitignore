@@ -1,1 +1,4 @@
 HandVenv/
+__pycache__/
+.vscode/
+.idea/

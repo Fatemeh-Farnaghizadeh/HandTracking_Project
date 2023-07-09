@@ -32,7 +32,7 @@ volPer = np.interp(curentVol, [volRange[0],  volRange[1]], [0, 100])
 while cap.isOpened():
     ret, frame = cap.read()
     frame = detector.findHands(frame)
-    lmList = detector.findPosition(frame, draw=False)
+    lmList, side = detector.findPosition(frame, draw=False)
 
     if len(lmList) > 0:
         x1, y1 = lmList[4][1], lmList[4][2]

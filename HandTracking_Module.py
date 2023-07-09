@@ -29,21 +29,30 @@ class HandTracking():
         return img
     
     def findPosition(self, img, hand_num=0, draw=True):
-
         lmList = []
+        side = None
+
         if self.results.multi_hand_landmarks:
-            handLms = self.results.multi_hand_landmarks[hand_num]
 
-            for idx, lm in enumerate(handLms.landmark):
-                h, w, c = img.shape
-                cx, cy = int(lm.x * w), int(lm.y * h)
-                lmList.append([idx, cx, cy])
+            if hand_num <= (len(self.results.multi_hand_landmarks) - 1):
 
-                if draw:
-                    
-                    cv2.circle(img, (cx, cy), 5, (255, 0, 255), cv2.FILLED)
+                handLms = self.results.multi_hand_landmarks[hand_num]
 
-        return lmList
+                for idx, lm in enumerate(handLms.landmark):
+                    h, w, c = img.shape
+                    cx, cy = int(lm.x * w), int(lm.y * h)
+                    lmList.append([idx, cx, cy])
+                
+                if lmList[0][1] > lmList[1][1]:
+                    side = 'left'
+                
+                else:
+                    side = 'right'
+
+                    if draw:                  
+                        cv2.circle(img, (cx, cy), 5, (255, 0, 255), cv2.FILLED)
+
+        return lmList, side
     
 
 def main():
@@ -55,7 +64,7 @@ def main():
     while True:
         success, img = cap.read()
         img = detector.findHands(img, False)
-        lmList = detector.findPosition(img)
+        lmList, side = detector.findPosition(img)
         if len(lmList) != 0:
             print(lmList[4])
         cTime = time.time()
@@ -67,6 +76,8 @@ def main():
         
         if cv2.waitKey(10) & 0xFF == ord('q'):
             break
+
+        print(side)
 
     cap.release()
     cv2.destroyAllWindows()

@@ -49,7 +49,8 @@ class HandTracking():
                 else:
                     side = 'right'
 
-                    if draw:                  
+                    if draw:
+                    
                         cv2.circle(img, (cx, cy), 5, (255, 0, 255), cv2.FILLED)
 
         return lmList, side

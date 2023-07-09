@@ -89,7 +89,7 @@ while True:
 
         if len(Hand1) != 0:
             total = upFingers.count(1)           
-            cv2.putText(frame, f'total = {total}', (25, 200), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 0, 0), 2)
+            cv2.putText(frame, f'total= {total}', (25, 200), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 0, 0), 2)
 
         video_writer.write(frame)
 
